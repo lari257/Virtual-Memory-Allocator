@@ -1,0 +1,29 @@
+# Virtual Memory Allocator
+
+Copyright 2023 Florea Larisa
+
+## Overview
+
+This assignment simulates a virtual memory allocator using a doubly-linked list structure. The main structure is a doubly-linked list whose nodes contain data represented as smaller doubly-linked lists (mini-blocks), essentially creating a doubly-linked list within another doubly-linked list.
+
+The program utilizes a `switch` statement to execute corresponding code based on the value returned by the `convert` function. Each case in the switch statement corresponds to a different command that the program can execute, such as allocating and deallocating memory, reading and writing data in memory, and changing permissions.
+
+### Commands
+
+- `ALLOC_ARENA`: Allocates the memory arena to be subsequently populated.
+- `ALLOC_BLOCK`: Allocates a new mini-block which can be:
+  1. Inserted as a new block.
+  2. Inserted as part of an existing block.
+  3. Used to merge two existing blocks.
+  - Maintains the block list sorted by address.
+- `FREE_BLOCK`: Deallocates a mini-block or block based on the desired address.
+  1. If the block containing the mini-block has only one component, the block is also removed.
+  2. If a mini-block within a block's list is removed, the block will split into two separate blocks.
+  3. If the mini-block's address represents the first or last element of a block, only the mini-block is removed.
+- `DEALLOC_ARENA`: Deallocates all used resources.
+- `PMAP`: Lists information about the used memory and block list.
+- `WRITE`: Writes to a specific address in the mini-block buffers.
+- `READ`: Reads the contents of the buffer from a specified address.
+- `MPROTECT`: Changes the permissions of a specified address.
+
+Each primary function is supported by secondary functions. The assignment also incorporates defensive programming practices.
